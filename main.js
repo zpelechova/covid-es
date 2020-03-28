@@ -30,7 +30,14 @@ Apify.main(async () => {
         const recovered = $("#recuperados").text();
         const hospitalised = $("#hospitalizados").text();
 
-        // const regions
+        const regionsTableRows = Array.from(document.querySelectorAll("table tbody tr"));
+        const regionData = [];
+
+        for(const row of regionsTableRows){
+            const cells = Array.from(row.querySelectorAll("td")).map(td=> td.textContent);
+            regionData.push({region: cells[0], total: cells[1], lastDay: cells[2], inc14d: cells[3]});
+        }
+
 
         const data = {
             infected: infected,
@@ -40,7 +47,7 @@ Apify.main(async () => {
             sourceUrl: 'https://covid19.isciii.es/',
             lastUpdatedAtApify: new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes())).toISOString(),
             readMe: 'https://github.com/zpelechova/covid-es/blob/master/README.md',
-            // regions: regions,
+            regions: regionData,
         };
         return data;
 
