@@ -17,7 +17,7 @@ Apify.main(async () => {
     await Apify.utils.puppeteer.injectJQuery(page);
 
     console.log('Going to the website...');
-    await page.goto(sourceUrl), { waitUntil: 'networkidle0', timeout: 600000 };
+    await page.goto(sourceUrl, { waitUntil: 'networkidle0', timeout: 60000 });
 
     console.log('Getting data...');
     // page.evaluate(pageFunction[, ...args]), pageFunction <function|string> Function to be evaluated in the page context, returns: <Promise<Serializable>> Promise which resolves to the return value of pageFunction
